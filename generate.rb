@@ -13,10 +13,8 @@ end
 DAYS = %w[lundi mardi mercredi jeudi vendredi samedi dimanche]
 MONTHS = %w[janvier février mars avril mai juin juillet août septembre octobre novembre decembre]
 
-
-pdf = Prawn::Document.generate("semaine.pdf") do
-  font_families.update("helvetica" => {:normal => "helvetica.ttf"})
-  font "helvetica"
+Prawn::Fonts::AFM.hide_m17n_warning = true
+pdf = Prawn::Document.generate("semainier.pdf", page_size: "A4", margin: 0) do
   stroke_color "cccccc"
 
   today = Date.today
@@ -30,7 +28,7 @@ pdf = Prawn::Document.generate("semaine.pdf") do
   DAYS.each_with_index do |name, index|
     grid(0, index).bounding_box do |box|
       stroke_bounds
-      text name, align: :center
+      text name, align: :center, valign: :center
     end
   end
 
@@ -45,6 +43,4 @@ pdf = Prawn::Document.generate("semaine.pdf") do
   end
 end
 
-# render_file
-
-`open semaine.pdf`
+`open semainier.pdf`
