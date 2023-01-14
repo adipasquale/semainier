@@ -18,7 +18,7 @@ pdf = Prawn::Document.generate("semainier.pdf", page_size: "A4", margin: 0) do
   stroke_color "cccccc"
 
   today = Date.today
-  first = today.beginning_of_month.beginning_of_week
+  first = today.beginning_of_week
   last = (today + 2.months).end_of_month.end_of_week
   first_week_number = week_number(first)
   weeks_count = (last - first).to_i.days.in_weeks.ceil
